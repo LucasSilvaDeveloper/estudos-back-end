@@ -1,6 +1,7 @@
 package com.elaine.projeto.atualizacao.dto;
 
 import com.elaine.projeto.atualizacao.model.Atendimento;
+import com.elaine.projeto.atualizacao.model.TipoAtendimento;
 
 import java.time.LocalDateTime;
 
@@ -8,7 +9,7 @@ public record AtendimentoDTO(
         Long id,
         String nomeFisioterapeuta,
         String nomeAluno,
-        String tipoAtendimento,
+        TipoAtendimento tipoAtendimento,
         LocalDateTime dataAtendimento) {
 
     public Atendimento toAtendimento() {
