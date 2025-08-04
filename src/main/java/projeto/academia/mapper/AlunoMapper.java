@@ -19,7 +19,7 @@ public class AlunoMapper {
         return aluno;
     }
 
-    public static AlunoResponseDTO toResponse(Aluno entity) {
+    public static AlunoResponseDTO toResponse(CadastroAlunoEntity entity) {
         AlunoResponseDTO dto = new AlunoResponseDTO();
         dto.setId(entity.getId());
         dto.setNomeCompleto(entity.getNomeCompleto());

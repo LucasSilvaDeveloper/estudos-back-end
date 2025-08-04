@@ -6,8 +6,11 @@ import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDate;
+import lombok.Getter;
+import lombok.Setter;
 
-
+@Getter
+@Setter
 public class AlunoRequestDTO {
 
     @NotBlank(message = "o nome é obrigatório")
