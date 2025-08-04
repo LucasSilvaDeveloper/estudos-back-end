@@ -1,4 +1,4 @@
 package projeto.academia.controller;
 
-public class CadastroController {
+public class CadastroAlunoController {
 }
