@@ -1,5 +1,7 @@
 package projeto.academia.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import projeto.academia.dto.AlunoRequestDTO;
 import projeto.academia.dto.AlunoResponseDTO;
@@ -18,6 +20,12 @@ public class CadastroAlunoService {
         this.alunoRepository = alunoRepository;
     }
 
+    //Paginação
+    public Page<AlunoResponseDTO> listar(Pageable pageable){
+        return alunoRepository.findAll(pageable)
+                .map(AlunoMapper::toResponse);
+    }
+
     // Criar aluno
     public AlunoResponseDTO cadastrar(AlunoRequestDTO dto) {
         alunoRepository.findByCpf(dto.getCpf())
@@ -30,7 +38,7 @@ public class CadastroAlunoService {
         return AlunoMapper.toResponse(saved);
     }
 
-    // Listar todos
+    // Listar todos sem paginação
     public List<AlunoResponseDTO> listarTodos() {
         return alunoRepository.findAll()
                 .stream()
@@ -41,14 +49,25 @@ public class CadastroAlunoService {
     // Buscar por ID
     public AlunoResponseDTO buscarPorId(Long id) {
         CadastroAlunoEntity entity = alunoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Aluno não encontrado" + id));
         return AlunoMapper.toResponse(entity);
     }
+
+    //Buscar por CPF
+    public AlunoResponseDTO buscarPorCpf(String cpf){
+        CadastroAlunoEntity entity = alunoRepository.findByCpf(cpf)
+                .orElseThrow(() -> new RuntimeException("Aluno não encontrado com CPF" + cpf));
+        return AlunoMapper.toResponse(entity);
+    }
+
+    //8260
+
 
     // Atualizar (PUT - todos os campos)
     public AlunoResponseDTO atualizar(Long id, AlunoRequestDTO dto) {
         CadastroAlunoEntity entity = alunoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+
 
         // Substitui todos os campos
         entity.setNomeCompleto(dto.getNomeCompleto());

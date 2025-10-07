@@ -3,7 +3,6 @@ package projeto.academia.model;
 import jakarta.persistence.*;
 import projeto.academia.model.enums.StatusAlunoEnum;
 import lombok.*;
-
 import java.time.LocalDate;
 
 

@@ -1,5 +1,7 @@
 package projeto.academia.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +29,7 @@ public class CadastroAlunoController {
     }
 
     // Listar todos
-    @GetMapping
+    @GetMapping("/todos")
     public ResponseEntity<List<AlunoResponseDTO>> listarTodos() {
         return ResponseEntity.ok(cadastroAlunoService.listarTodos());
     }
@@ -55,5 +57,10 @@ public class CadastroAlunoController {
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         cadastroAlunoService.deletar(id);
         return ResponseEntity.noContent().build();
+    }
+
+    //Paginação
+    public ResponseEntity<Page<AlunoResponseDTO>> listar(Pageable pageable) {
+        return ResponseEntity.ok(cadastroAlunoService.listar(pageable));
     }
 }
